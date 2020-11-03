@@ -1,0 +1,33 @@
+.app-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+}
+
+.menu-wrapper {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid lightgrey;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  overflow: hidden;
+
+  > button {
+    width: 200px;
+    margin-left: 10px;
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  padding-top: 30px;
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    width: 100%;
+  }
+}

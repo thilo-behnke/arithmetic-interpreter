@@ -1,0 +1,11 @@
+micronaut:
+  application:
+    name: server
+  server:
+    cors:
+      enabled: true
+      configurations:
+        web:
+          allowedOrigins:
+            - "http://interpreter.whos-coding.com"
+mongodb.uri: mongodb://document-db:27017

@@ -1,0 +1,31 @@
+.interpreter {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  &__input {
+    display: flex;
+    align-items: center;
+    width: 40%;
+
+    &__field {
+      flex: 1 1 auto;
+    }
+  }
+
+  &__commands {
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+
+    * + * {
+      margin-left: 10px;
+    }
+  }
+
+  &__result {
+    width: 40%;
+  }
+}

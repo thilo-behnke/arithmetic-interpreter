@@ -1,0 +1,20 @@
+<div class="app-wrapper">
+  <div class="menu-wrapper">
+    <ng-container *ngFor="let route of routes">
+      <button
+        mat-button
+        mat-raised-button
+        [routerLink]="route.path"
+        routerLinkActive="mat-accent"
+      >
+        <span class="material-icons">{{ route.icon }}</span>
+        <span style="margin-left: 5px">{{ route.name }}</span>
+      </button>
+    </ng-container>
+  </div>
+  <div class="content-wrapper">
+    <div class="content-wrapper__content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

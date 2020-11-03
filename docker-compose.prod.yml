@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: ./client
+      args:
+        - SERVER_URL=$SERVER_URL
+    env_file:
+      - .env
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+  server:
+    build:
+      context: ./server
+      args:
+        - CLIENT_URL=$CLIENT_URL
+    depends_on:
+      - document-db
+    env_file:
+      - .env
+  document-db:
+    build:
+      context: document-db
