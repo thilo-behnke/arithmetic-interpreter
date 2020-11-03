@@ -1,5 +1,6 @@
 package server.service
 
+import grails.gorm.transactions.Transactional
 import server.model.VariableBinding
 
 import javax.inject.Singleton
@@ -11,8 +12,9 @@ class VariableBindingService {
         bindings.entrySet().collect {saveBinding(it.key, it.value)}
     }
 
+    @Transactional
     VariableBinding saveBinding(String varName, Double value) {
-        def varBinding = VariableBinding.findByVarName(varName);
+        def varBinding = VariableBinding.findByVarName(varName)
         if (varBinding) {
             varBinding.setValue(value)
         } else {
@@ -22,7 +24,7 @@ class VariableBindingService {
     }
 
     Set<VariableBinding> getBindings() {
-        return VariableBinding.findAll();
+        return VariableBinding.findAll()
     }
 
     void clearBindings() {
