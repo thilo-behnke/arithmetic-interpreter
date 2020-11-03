@@ -24,4 +24,4 @@ Access web-client: `http://0.0.0.0:80`
 
 # Demo
 
-Run: `http://interpreter.whos-coding.com`
+Visit the online [demo](http://interpreter.whos-coding.com`).
