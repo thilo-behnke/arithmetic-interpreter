@@ -3,7 +3,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'interpreter-command',
   styleUrls: ['./interpreter-command.component.scss'],
-  template: `<button class="command" mat-button mat-raised-button [color]='color' (click)="execute.next(id)">
+  template: `<button
+    class="command"
+    mat-button
+    mat-raised-button
+    [color]="color"
+    (click)="execute.next(id)"
+  >
     <div class="command__content">
       <span class="material-icons">{{ icon }}</span>
       <span class="command__content__text">{{ name }}</span>

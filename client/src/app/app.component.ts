@@ -1,5 +1,5 @@
-import {Component, HostListener} from '@angular/core';
-import {ResizeService} from "./interpreter/layout/resize.service";
+import { Component, HostListener } from '@angular/core';
+import { ResizeService } from './interpreter/layout/resize.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,5 @@ import {ResizeService} from "./interpreter/layout/resize.service";
 export class AppComponent {
   title = 'client';
 
-  routes = [
-    { path: '/', name: 'Arithmetic Interpreter', icon: 'calculate' }
-  ];
-
+  routes = [{ path: '/', name: 'Arithmetic Interpreter', icon: 'calculate' }];
 }
