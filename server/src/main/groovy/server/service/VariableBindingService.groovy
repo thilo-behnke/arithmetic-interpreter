@@ -8,19 +8,21 @@ import javax.inject.Singleton
 @Singleton
 class VariableBindingService {
 
+    @Transactional
     Set<VariableBinding> saveBindings(Map<String, Double> bindings) {
-        bindings.entrySet().collect {saveBinding(it.key, it.value)}
+        def mappedBindings = bindings.entrySet().collect {mapToBinding(it.key, it.value)}
+        VariableBinding.saveAll(mappedBindings)
+        return mappedBindings
     }
 
-    @Transactional
-    VariableBinding saveBinding(String varName, Double value) {
+    private VariableBinding mapToBinding(String varName, Double value) {
         def varBinding = VariableBinding.findByVarName(varName)
         if (varBinding) {
             varBinding.setValue(value)
         } else {
             varBinding = new VariableBinding(varName: varName, value: value)
         }
-        varBinding.save()
+        return varBinding
     }
 
     Set<VariableBinding> getBindings() {
