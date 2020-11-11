@@ -41,10 +41,11 @@ export class AstVisualizerComponent implements OnChanges, AfterViewInit, OnDestr
   ngAfterViewInit(): void {
     this.resizeService.resize.pipe(takeUntil(this._destroy$)).subscribe(() => {
       const parentWidth = this.elRef.nativeElement.offsetParent.clientWidth;
+      console.log(parentWidth);
 
-      const childElements = this.elRef.nativeElement.children;
+      const childElements = this.svgContainer.nativeElement.children;
       for (const child of childElements) {
-        this.renderer.removeChild(this.elRef.nativeElement, child);
+        this.renderer.removeChild(this.svgContainer.nativeElement, child);
       }
       this.renderer.setStyle(this.svgContainer.nativeElement, 'width', `${parentWidth}px`);
       this.renderAst();
