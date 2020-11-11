@@ -50,7 +50,6 @@ export const interpreterRoutes: Routes = [
     AstVisualizerComponent,
     InterpreterResultComponent,
     InterpreterInputComponent,
-    InterpreterSubmitComponent,
     InterpreterCommandComponent,
   ],
   providers: [
