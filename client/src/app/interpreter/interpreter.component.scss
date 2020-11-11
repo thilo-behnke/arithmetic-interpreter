@@ -3,8 +3,6 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
 
   &__input {
     width: 100%;
@@ -25,16 +23,13 @@
     margin-top: -20px;
 
     > * {
-      flex: 1 1 300px;
+      flex: 0 0 300px;
       display: flex;
       margin-top: 20px;
-      margin-left: 10px;
-      margin-right: 10px;
     }
   }
 
   &__result {
     width: 100%;
   }
-
 }
