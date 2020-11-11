@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'client';
 
   routes = [
-    { path: '/', name: 'Arithmetic Interpreter' }
+    { path: '/', name: 'Arithmetic Interpreter', icon: 'calculate' }
   ];
 }

@@ -1,0 +1,34 @@
+.command {
+  flex: 1 1 auto;
+
+  display: flex;
+  justify-content: center;
+
+  &__content {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    * + * {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  :host {
+    justify-content: space-evenly;
+    flex: 0 1 auto !important;
+  }
+
+  .command {
+    flex: 0 0 auto;
+
+    &__content {
+      &__text {
+        display: none !important;
+      }
+    }
+  }
+}
+

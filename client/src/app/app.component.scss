@@ -15,6 +15,9 @@
 
   > button {
     width: 200px;
+  }
+
+  button + button {
     margin-left: 10px;
   }
 }
@@ -27,7 +30,7 @@
 
   &__content {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: auto minmax(300px, 60vw) auto;
     width: 100%;
   }
 }

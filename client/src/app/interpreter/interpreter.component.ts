@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { InterpreterService } from './interpreter.service';
-import { catchError, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { InterpreterResult } from './model/interpreter-result';
+import {Component} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {InterpreterService} from './interpreter.service';
+import {catchError, tap} from 'rxjs/operators';
+import {of} from 'rxjs';
+import {InterpreterResult} from './model/interpreter-result';
 
 @Component({
   selector: 'app-interpreter',
@@ -17,10 +17,12 @@ import { InterpreterResult } from './model/interpreter-result';
         ></interpreter-input>
       </div>
       <div class="interpreter__commands">
-        <ng-container *ngFor="let command of commands | keyvalue">
+        <ng-container *ngFor="let command of commands">
           <interpreter-command
-            [id]="command.value"
-            [name]="command.value + ' (' + command.key + ')'"
+            [id]="command.name"
+            [name]="command.name + ' (' + command.command + ')'"
+            [color]="command.color"
+            [icon]="command.icon"
             (execute)="handleCommandButton($event)"
           ></interpreter-command>
         </ng-container>
@@ -51,15 +53,16 @@ export class InterpreterComponent {
 
   isLoading = false;
 
-  commands = {
-    ':var': 'GET_BINDINGS',
-    ':clear': 'CLEAR_BINDINGS',
-  };
+  commands = [
+    {command: ':var', name: 'GET_BINDINGS', color: 'primary', icon: 'help'},
+    {command: ':clear', name: 'CLEAR_BINDINGS', color: 'error', icon: 'delete'}
+  ];
 
   constructor(
     private interpreterService: InterpreterService,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+  }
 
   private init() {
     this.interpreterResult = null;

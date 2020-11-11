@@ -3,29 +3,38 @@
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 
   &__input {
+    width: 100%;
     display: flex;
     align-items: center;
-    width: 40%;
 
     &__field {
-      flex: 1 1 auto;
+      flex: 1 1 90%;
     }
   }
 
   &__commands {
-    width: 40%;
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
+    flex-flow: row wrap;
+    justify-content: space-between;
     margin-bottom: 20px;
+    margin-top: -20px;
 
-    * + * {
+    > * {
+      flex: 1 1 300px;
+      display: flex;
+      margin-top: 20px;
       margin-left: 10px;
+      margin-right: 10px;
     }
   }
 
   &__result {
-    width: 40%;
+    width: 100%;
   }
+
 }

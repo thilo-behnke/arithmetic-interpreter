@@ -24,11 +24,11 @@ import { InterpreterCommandComponent } from './commands/interpreter-command.comp
 import { MatOptionModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-const routes: Routes = [{ path: '', component: InterpreterComponent }];
+export const interpreterRoutes: Routes = [{ path: '', component: InterpreterComponent }];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
+    RouterModule.forChild(interpreterRoutes),
     FormsModule,
     CommonModule,
     MatInputModule,

@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {InterpreterInputComponent} from './interpreter/input/interpreter-input.component';
+import {interpreterRoutes} from './interpreter/interpreter.module';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./interpreter/interpreter.module').then(
-        (m) => m.InterpreterModule
-      ),
+    children: interpreterRoutes
   }
 ];
 
