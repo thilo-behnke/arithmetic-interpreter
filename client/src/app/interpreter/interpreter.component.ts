@@ -20,7 +20,7 @@ import { InterpreterResult } from './model/interpreter-result';
         <ng-container *ngFor="let command of commands">
           <interpreter-command
             [id]="command.name"
-            [name]="command.name + ' (' + command.command + ')'"
+            [name]="command.name"
             [color]="command.color"
             [icon]="command.icon"
             (execute)="handleCommandButton($event)"
