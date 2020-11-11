@@ -1,20 +1,22 @@
 import {
   AfterViewInit,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   Input,
   OnChanges,
-  OnDestroy, Renderer2,
+  OnDestroy,
+  Renderer2,
   SimpleChanges,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import * as treant from 'treant-js';
 import * as raphael from 'raphael';
-import {AST} from '../model/interpreter-result';
-import {AstTreantConversionService} from './ast-treant-conversion.service';
-import {ResizeService} from "../layout/resize.service";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import { AST } from '../model/interpreter-result';
+import { AstTreantConversionService } from './ast-treant-conversion.service';
+import { ResizeService } from '../layout/resize.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ast-visualizer',
@@ -26,7 +28,11 @@ import {takeUntil} from "rxjs/operators";
   styleUrls: ['./ast-visualizer.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AstVisualizerComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class AstVisualizerComponent
+  implements OnChanges, AfterViewInit, OnDestroy {
+  @Input()
+  parent: ElementRef;
+
   @Input()
   ast: AST;
 
@@ -35,24 +41,43 @@ export class AstVisualizerComponent implements OnChanges, AfterViewInit, OnDestr
 
   private _destroy$ = new Subject();
 
-  constructor(private astTreantConversionService: AstTreantConversionService, private resizeService: ResizeService, private elRef: ElementRef, private renderer: Renderer2) {
-  }
+  constructor(
+    private astTreantConversionService: AstTreantConversionService,
+    private resizeService: ResizeService,
+    private renderer: Renderer2
+  ) {}
 
   ngAfterViewInit(): void {
-    this.resizeService.resize.pipe(takeUntil(this._destroy$)).subscribe(() => {
-      const parentWidth = this.elRef.nativeElement.offsetParent.clientWidth;
-      console.log(parentWidth);
+    this.updateAst();
 
-      const childElements = this.svgContainer.nativeElement.children;
-      for (const child of childElements) {
-        this.renderer.removeChild(this.svgContainer.nativeElement, child);
-      }
-      this.renderer.setStyle(this.svgContainer.nativeElement, 'width', `${parentWidth}px`);
-      this.renderAst();
+    this.resizeService.resize.pipe(takeUntil(this._destroy$)).subscribe(() => {
+      this.updateAst();
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (this.svgContainer?.nativeElement) {
+      this.updateAst();
+    }
+  }
+
+  private updateAst() {
+    const parentWidth = this.parent.nativeElement.offsetWidth;
+
+    const childElements = this.svgContainer.nativeElement.children;
+    for (const child of childElements) {
+      this.renderer.removeChild(this.svgContainer.nativeElement, child);
+    }
+    this.renderer.setStyle(
+      this.svgContainer.nativeElement,
+      'width',
+      `${parentWidth}px`
+    );
+    this.renderer.setAttribute(
+      this.svgContainer.nativeElement,
+      'class',
+      'chart'
+    );
     this.renderAst();
   }
 
@@ -68,7 +93,7 @@ export class AstVisualizerComponent implements OnChanges, AfterViewInit, OnDestr
     const treantConfig = {
       chart: {
         container: '#ast-container',
-        node: {HTMLclass: 'ast-node'},
+        node: { HTMLclass: 'ast-node' },
         nodeAlign: 'TOP',
         connectors: {
           type: 'curve',

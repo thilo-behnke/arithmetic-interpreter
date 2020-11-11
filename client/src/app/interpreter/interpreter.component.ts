@@ -1,9 +1,9 @@
-import {Component} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {InterpreterService} from './interpreter.service';
-import {catchError, tap} from 'rxjs/operators';
-import {of} from 'rxjs';
-import {InterpreterResult} from './model/interpreter-result';
+import { Component, ElementRef } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { InterpreterService } from './interpreter.service';
+import { catchError, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { InterpreterResult } from './model/interpreter-result';
 
 @Component({
   selector: 'app-interpreter',
@@ -41,7 +41,10 @@ import {InterpreterResult} from './model/interpreter-result';
         <ng-container *ngIf="error"> Error: {{ error | json }} </ng-container>
       </interpreter-result>
       <ng-container *ngIf="interpreterResult">
-        <app-ast-visualizer [ast]="interpreterResult.ast"></app-ast-visualizer>
+        <app-ast-visualizer
+          [ast]="interpreterResult.ast"
+          [parent]="elRef"
+        ></app-ast-visualizer>
       </ng-container>
     </div>
   `,
@@ -54,15 +57,20 @@ export class InterpreterComponent {
   isLoading = false;
 
   commands = [
-    {command: ':var', name: 'GET_BINDINGS', color: 'primary', icon: 'help'},
-    {command: ':clear', name: 'CLEAR_BINDINGS', color: 'error', icon: 'delete'}
+    { command: ':var', name: 'GET_BINDINGS', color: 'primary', icon: 'help' },
+    {
+      command: ':clear',
+      name: 'CLEAR_BINDINGS',
+      color: 'error',
+      icon: 'delete',
+    },
   ];
 
   constructor(
     private interpreterService: InterpreterService,
-    private snackBar: MatSnackBar
-  ) {
-  }
+    private snackBar: MatSnackBar,
+    public elRef: ElementRef
+  ) {}
 
   private init() {
     this.interpreterResult = null;
