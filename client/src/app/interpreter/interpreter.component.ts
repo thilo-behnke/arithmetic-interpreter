@@ -57,7 +57,7 @@ export class InterpreterComponent {
   isLoading = false;
 
   commands = [
-    { command: ':var', name: 'GET_BINDINGS', color: 'primary', icon: 'help' },
+    { command: ':var', name: 'GET_BINDINGS', color: 'secondary', icon: 'help' },
     {
       command: ':clear',
       name: 'CLEAR_BINDINGS',

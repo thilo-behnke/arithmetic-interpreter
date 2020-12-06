@@ -30,7 +30,12 @@
 
   &__content {
     display: grid;
-    grid-template-columns: auto minmax(200px, 30vw) auto;
+    @media screen and (max-width: 800px) {
+      grid-template-columns: auto minmax(200px, 80vw) auto;
+    }
+    @media screen and (min-width: 801px) {
+      grid-template-columns: auto minmax(200px, 30vw) auto;
+    }
     width: 100%;
   }
 }
